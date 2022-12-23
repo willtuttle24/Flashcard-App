@@ -1,16 +1,16 @@
 import React from "react";
 import {Route, Switch} from "react-router-dom";
-import "./src/Layout/Layout.css";
+import "./Layout.css";
 
-import Header from "./src/Layout/Header.js"
-import Home from "./src/Layout/decks/Study.js"
-import Study from "./src/Layout/decks/Study.js"
-import CreateDeckScreen from "./src/Layout/decks/CreateDeckScreen.js";
-import DeckScreen from "./src/Layout/decks/DeckScreen.js";
-import EditDeckScreen from "./src/Layout/cards/EditCardScreen.js";
-import AddCardScreen from "./src/Layout/cards/AddCardScreen.js";
-import EditCardScreen from "./src/Layout/cards/EditCardScreen.js";
-import NotFound from "./src/Layout/NotFound.js";
+import Header from "./Header";
+import Home from "./home/home";
+import Study from "./decks/Study";
+import CreateDeckScreen from "./decks/CreateDeckScreen";
+import DeckScreen from "./decks/DeckScreen";
+import EditDeckScreen from "./decks/EditDeckScreen";
+import AddCardScreen from "./cards/AddCardScreen";
+import EditCardScreen from "./cards/EditCardScreen";
+import NotFound from "./NotFound";
 
 function Layout() {
     return (

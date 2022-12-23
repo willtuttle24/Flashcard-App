@@ -1,8 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {listDecks} from "../../utils/api/index";
-import "../../Layout/home/home.css";
+import "./home.css";
 
-//import functions for create, view study and delete - here
+//import functions for create, view study and delete 
+import createDeckButton from "./createDeckButton";
+import viewDeckButton from "./viewDeckButton";
+import studyDeckButton from "./studyDeckButton";
+import deleteDeckButton from "./deleteDeckButton";
 
 function Home() {
     const [decks, setDecks] = useState([]);
@@ -20,7 +24,7 @@ useEffect(() => {
 
 return (
     <div className="home">
-      <CreateDeckButton />
+      <createDeckButton />
 
       {decks.map((deck, index) => {
         return (
@@ -35,11 +39,11 @@ return (
               <p className="card-text">{deck.description}</p>
               <div className="d-flex">
                 <div className="mr-auto">
-                  <ViewDeckButton deck={deck} />
-                  <StudyDeckButton deck={deck} />
+                  <viewDeckButton deck={deck} />
+                  <studyDeckButton deck={deck} />
                 </div>
                 <div>
-                  <DeleteDeckButton deck={deck} />
+                  <deleteDeckButton deck={deck} />
                 </div>
               </div>
             </div>
