@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {listDecks} from "../../utils/api/index"
-import "home.css";
+import {listDecks} from "../../utils/api/index";
+import "../../Layout/home/home.css";
 
 //import functions for create, view study and delete - here
 
