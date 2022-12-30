@@ -3,10 +3,10 @@ import {listDecks} from "../../utils/api/index";
 import "./home.css";
 
 //import functions for create, view study and delete 
-import createDeckButton from "./createDeckButton";
-import viewDeckButton from "./viewDeckButton";
-import studyDeckButton from "./studyDeckButton";
-import deleteDeckButton from "./deleteDeckButton";
+import CreateDeckButton from "./CreateDeckButton";
+import ViewDeckButton from "./ViewDeckButton";
+import StudyDeckButton from "./StudyDeckButton"; 
+import DeleteDeckButton from "./DeleteDeckButton";
 
 function Home() {
     const [decks, setDecks] = useState([]);
@@ -24,7 +24,7 @@ useEffect(() => {
 
 return (
     <div className="home">
-      <createDeckButton />
+      <CreateDeckButton />
 
       {decks.map((deck, index) => {
         return (
@@ -39,11 +39,11 @@ return (
               <p className="card-text">{deck.description}</p>
               <div className="d-flex">
                 <div className="mr-auto">
-                  <viewDeckButton deck={deck} />
-                  <studyDeckButton deck={deck} />
+                  <ViewDeckButton deck={deck} />
+                  <StudyDeckButton deck={deck} />
                 </div>
                 <div>
-                  <deleteDeckButton deck={deck} />
+                  <DeleteDeckButton deck={deck} />
                 </div>
               </div>
             </div>
