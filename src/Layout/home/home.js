@@ -3,9 +3,9 @@ import {listDecks} from "../../utils/api/index";
 import "./home.css";
 
 //import functions for create, view study and delete 
-import CreateDeckButton from "./CreateDeckButton";
+//import CreateDeckButton from "./CreateDeckButton";
 import ViewDeckButton from "./ViewDeckButton";
-import StudyDeckButton from "./StudyDeckButton"; 
+//import StudyDeckButton from "./StudyDeckButton"; 
 import DeleteDeckButton from "./DeleteDeckButton";
 
 function Home() {
@@ -21,10 +21,11 @@ useEffect(() => {
     loadDecks();
 }, [])
 
-
+//<CreateDeckButton />
+//<StudyDeckButton deck={deck} />
 return (
     <div className="home">
-      <CreateDeckButton />
+      
 
       {decks.map((deck, index) => {
         return (
@@ -40,7 +41,6 @@ return (
               <div className="d-flex">
                 <div className="mr-auto">
                   <ViewDeckButton deck={deck} />
-                  <StudyDeckButton deck={deck} />
                 </div>
                 <div>
                   <DeleteDeckButton deck={deck} />
