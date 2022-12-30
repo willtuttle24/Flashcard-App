@@ -3,9 +3,9 @@ import {Route, Switch} from "react-router-dom";
 import "./Layout.css";
 
 import Header from "./Header";
-import Home from "./home";
+import Home from "./home/home";
 import Study from "./decks/Study";
-import CreateDeckScreen from "./CreateDeckScreen";
+import CreateDeckScreen from "./decks/CreateDeckScreen";
 import DeckScreen from "./decks/DeckScreen";
 import EditDeckScreen from "./decks/EditDeckScreen";
 import AddCardScreen from "./cards/AddCardScreen";
@@ -23,7 +23,7 @@ function Layout() {
             </Route>
   
             <Route path="/decks/new">
-              <CreateDeckScreen />
+             <CreateDeckScreen />
             </Route>
   
             <Route path="/decks/:deckId/cards/new">
