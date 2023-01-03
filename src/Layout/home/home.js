@@ -23,6 +23,7 @@ useEffect(() => {
 
 //<CreateDeckButton />
 //<StudyDeckButton deck={deck} />
+console.log("Home")
 return (
     <div className="home">
       

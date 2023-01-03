@@ -1,7 +1,9 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { deleteDeck } from "../../utils/api/index";
 
 function DeleteDeckButton({ deck }) {
+  const history = useHistory();
   // When the user clicks the "Delete" button, the warning message below is shown.
   // If the user clicks "OK", the deck is deleted and the will no longer be visible
   // on the Home screen
@@ -9,7 +11,9 @@ function DeleteDeckButton({ deck }) {
     if (
       window.confirm("Delete this deck? You will not be able to recover it.")
     ) {
-      deleteDeck(deck.id);
+      deleteDeck(deck.id).then(() => {
+        console.log("deleted") 
+        history.push("/")});
     }
   };
 

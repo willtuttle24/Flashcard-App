@@ -11,7 +11,9 @@ function DeckScreenDeleteButton({ deckId }) {
     if (
       window.confirm("Delete this deck? You will not be able to recover it.")
     ) {
-      deleteDeck(deckId).then(() => history.push("/"));
+      deleteDeck(deckId).then(() => {
+        console.log("deleted") 
+        history.push("/")});
     }
   };
 
