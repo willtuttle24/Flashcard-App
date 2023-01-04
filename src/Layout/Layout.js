@@ -4,7 +4,7 @@ import "./Layout.css";
 
 import Header from "./Header";
 import Home from "./home/home";
-//import Study from "./decks/Study";
+import Study from "./decks/Study";
 //import CreateDeckScreen from "./decks/CreateDeckScreen";
 import DeckScreen from "./decks/DeckScreen";
 //import EditDeckScreen from "./decks/EditDeckScreen";
@@ -26,11 +26,8 @@ import NotFound from "./NotFound";
   
             <Route path="/decks/:deckId/edit">
               <EditDeckScreen />
-            </Route>
-            <Route path="/decks/:deckId/study">
-              <Study />
-            </Route>
-            */
+            </Route>   */
+            
 
 function Layout() {
     return (
@@ -45,7 +42,11 @@ function Layout() {
             <Route path="/decks/:deckId">
               <DeckScreen />
             </Route>
-  
+            
+            <Route path="/decks/:deckId/study">
+              <Study />
+            </Route>
+         
             <Route>
               <NotFound />
             </Route>
