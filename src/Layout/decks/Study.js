@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { readDeck } from "../../utils/api/index";
-import StudyCard from "./StudyCard";
+import StudyScreenNavBar from "./decks/StudyScreenNavBar";
+import StudyCard from "./cards/StudyCard";
 
 function Study() {
   const [deck, setDeck] = useState({});
@@ -23,7 +24,7 @@ function Study() {
 
   return (
     <div>
-      <StudyScreenBreadcrumbNavBar deckId={deckId} deck={deck}/>
+      <StudyScreenNavBar deckId={deckId} deck={deck}/>
       <h2 className="mb-4">Study: {deck.name}</h2>
       <StudyCard cards={cards} currentCard={currentCard} setCurrentCard={setCurrentCard} deckId={deckId}/>
     </div>
