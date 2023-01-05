@@ -16,14 +16,14 @@ import NotFound from "./NotFound";
              <CreateDeckScreen />
             </Route>
   
-            <Route path="/decks/:deckId/cards/new">
-              <AddCardScreen />
-            </Route>
+           
   
             <Route path="/decks/:deckId/cards/:cardId/edit">
               <EditCardScreen />
             </Route>
-  
+            <Route path="/decks/:deckId/cards/new">
+              <AddCardScreen />
+            </Route>
             <Route path="/decks/:deckId/edit">
               <EditDeckScreen />
             </Route>   */
@@ -35,21 +35,23 @@ function Layout() {
         <Header />
         <div className="container card">
           <Switch>
+
             <Route exact path="/">
               <Home />
+            </Route> 
+            
+            <Route path="/decks/:deckId/study">Rendering in React
+              <Study />
             </Route>
   
             <Route path="/decks/:deckId">
               <DeckScreen />
             </Route>
             
-            <Route path="/decks/:deckId/study">
-              <Study />
-            </Route>
-         
             <Route>
               <NotFound />
             </Route>
+            
           </Switch>
         </div>
       </>

@@ -3,7 +3,7 @@ import { useHistory, useRouteMatch } from "react-router";
 
 import FlipButton from "./FlipButton";
 import NextButton from "./NextButton";
-import AddCardsButton from "./AddCardsButton";
+//import AddCardsButton from "./cards/AddCardsButton";
 
 function StudyCard({ cards, currentCard, setCurrentCard, deckId }) {
   const [cardCount, setCardCount] = useState(1);
@@ -38,7 +38,7 @@ function StudyCard({ cards, currentCard, setCurrentCard, deckId }) {
   };
 
   // If there are less than 3 cards in a deck, the user will be prompted to add cards to the deck
-  if (cards.length < 3) {
+  /*if (cards.length < 3) {
     return (
       <div>
         <h4 className="text-danger font-weight-bold">Not enough cards!</h4>
@@ -49,7 +49,7 @@ function StudyCard({ cards, currentCard, setCurrentCard, deckId }) {
         <AddCardsButton deckId={deckId} />
       </div>
     );
-  }
+  } */
 
   // Renders the front of the card and the "Flip" button if isFrontOfCard is true
   if (isFrontOfCard) {
