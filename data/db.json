@@ -48,6 +48,36 @@
       "back": "b",
       "deckId": 1,
       "id": 7
+    },
+    {
+      "front": "How would you import useParams from React Router Dom from another file? ",
+      "back": "import {useParams} from \"react-router-dom\"",
+      "deckId": 2,
+      "id": 8
+    },
+    {
+      "front": "",
+      "back": "",
+      "deckId": 2,
+      "id": 9
+    },
+    {
+      "front": "",
+      "back": "",
+      "deckId": 2,
+      "id": 10
+    },
+    {
+      "front": "",
+      "back": "",
+      "deckId": 1,
+      "id": 11
+    },
+    {
+      "front": "",
+      "back": "",
+      "deckId": 1,
+      "id": 12
     }
   ]
 }

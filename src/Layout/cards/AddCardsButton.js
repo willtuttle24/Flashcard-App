@@ -9,7 +9,7 @@ function AddCardsButton({ deckId }) {
       className="btn btn-success"
       onClick={() => history.push(`/decks/${deckId}/cards/new`)}
     >
-      <span className="oi oi-plus" /> Add Cards
+      <span className="oi oi-plus" />
     </button>
   );
 }
