@@ -1,5 +1,7 @@
 import React from "react";
 
+//will be used for edit cards button too
+
 function CardForm({ cardFront, handleCardFrontChange, cardBack, handleCardBackChange }) {
   return (
     <div>

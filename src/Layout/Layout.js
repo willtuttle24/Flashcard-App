@@ -38,7 +38,7 @@ function Layout() {
               <Home />
             </Route> 
             
-               <Route path="/decks/:deckId/cards/new">
+            <Route path="/decks/:deckId/cards/new">
               <AddCardScreen />
             </Route>
             

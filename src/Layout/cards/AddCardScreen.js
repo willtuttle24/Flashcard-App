@@ -4,7 +4,6 @@ import { readDeck, createCard } from "../../utils/api/index";
 
 import AddCardNavBar from "./AddCardNavBar";
 import CardForm from "./CardForm";
-import AddCardsButton from "./AddCardsButton";
 
 function AddCardScreen() {
   const [deck, setDeck] = useState({});
@@ -43,7 +42,6 @@ function AddCardScreen() {
             cardBack={cardBack}
             handleCardBackChange={handleCardBackChange}
           />
-          <AddCardsButton deckId={deckId} />
           <button type="submit" className="btn btn-success">
             Save
           </button>

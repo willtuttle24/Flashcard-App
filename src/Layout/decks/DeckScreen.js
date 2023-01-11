@@ -7,7 +7,6 @@ import DeckInfo from "./DeckInfo";
 function DeckScreen() {
     const [deck, setDeck] = useState({});
     const [cards, setCards] = useState([]);
-  
     const deckId = useParams().deckId;
     const { url } = useRouteMatch();
   

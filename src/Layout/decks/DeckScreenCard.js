@@ -9,7 +9,7 @@ function DeckScreenCard({cards, deckId, url}) {
         if(
             window.confirm("Delete this card? You will not be able to undo this.")
         ) {
-            deleteCard(card.id);
+            deleteCard(card.id).then(() => history.push(`/decks/${deckId}`));
         }
     };
     const cardDisplay = cards.map((card, index) => {
