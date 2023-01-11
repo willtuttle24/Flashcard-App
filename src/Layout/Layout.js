@@ -5,7 +5,7 @@ import "./Layout.css";
 import Header from "./Header";
 import Home from "./home/home";
 import Study from "./decks/Study";
-//import CreateDeckScreen from "./decks/CreateDeckScreen";
+import CreateDeckScreen from "./decks/CreateDeckScreen";
 import DeckScreen from "./decks/DeckScreen";
 //import EditDeckScreen from "./decks/EditDeckScreen";
 import AddCardScreen from "./cards/AddCardScreen";
@@ -15,9 +15,7 @@ import NotFound from "./NotFound";
 
   
            
-   <Route path="/decks/new">
-             <CreateDeckScreen />
-            </Route>
+   
             <Route path="/decks/:deckId/cards/:cardId/edit">
               <EditCardScreen />
             </Route>
@@ -37,6 +35,10 @@ function Layout() {
             <Route exact path="/">
               <Home />
             </Route> 
+
+            <Route path="/decks/new">
+             <CreateDeckScreen />
+            </Route>
             
             <Route path="/decks/:deckId/cards/new">
               <AddCardScreen />
