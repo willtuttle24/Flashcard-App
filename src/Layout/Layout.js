@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Switch} from "react-router-dom";
-import "./Layout.css";
+import "Layout.css";
 
 import Header from "./Header";
 import Home from "./home/home";
@@ -15,7 +15,7 @@ import NotFound from "./NotFound";
 
 function Layout() {
     return (
-      <>
+      <div>
         <Header />
         <div className="container card">
           <Switch>
@@ -54,7 +54,7 @@ function Layout() {
 
           </Switch>
         </div>
-      </>
+      </div>
     );
   }
   
