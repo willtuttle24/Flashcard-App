@@ -8,8 +8,8 @@ import Study from "./decks/Study";
 import CreateDeckScreen from "./decks/CreateDeckScreen";
 import DeckScreen from "./decks/DeckScreen";
 import EditDeckScreen from "./decks/EditDeckScreen";
-import AddCardScreen from "./cards/AddCardScreen";
-import EditCardScreen from "./cards/EditCardScreen";
+import AddCardScreen from "./Cards/AddCardScreen";
+import EditCardScreen from "./Cards/EditCardScreen";
 import NotFound from "./NotFound";
             
 

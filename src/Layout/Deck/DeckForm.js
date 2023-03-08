@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { createCard, readCard, updateCard } from "../utils/api";
+import { createDeck, readDeck, updateDeck } from "../utils/api";
 
-export default function CardForm({ mode = "create" }) {
+export default function DeckForm({ mode }) {
   const history = useHistory();
-  const { deckId, cardId } = useParams();
+  const { deckId } = useParams();
+
   const initialFormData = {
-    front: "",
-    back: "",
+    name: "",
+    description: "",
   };
   const [formData, setFormData] = useState({ ...initialFormData });
 
@@ -16,75 +17,81 @@ export default function CardForm({ mode = "create" }) {
 
   useEffect(() => {
     const abortCon = new AbortController();
-    async function getEditCard() {
+
+    async function getEditDeck() {
       try {
-        const cardToEdit = await readCard(cardId, abortCon.signal);
-        setFormData({ ...cardToEdit });
+        const deckToEdit = await readDeck(deckId, abortCon.signal);
+        setFormData({ ...deckToEdit });
       } catch (err) {
         throw err;
       }
     }
     if (mode === "edit") {
-      getEditCard();
+      getEditDeck();
     }
     return () => abortCon.abort();
-  }, [cardId, mode]);
+  }, [deckId, mode]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const abortCon = new AbortController();
-    async function addCard() {
+    async function createNewDeck() {
       try {
-        await createCard(deckId, formData, abortCon.signal);
+        const newDeck = await createDeck(formData, abortCon.signal);
         setFormData({ ...initialFormData });
+        history.push(`/decks/${newDeck.id}`);
       } catch (err) {
         throw err;
       }
     }
-    async function editCard() {
+    async function editDeck() {
       try {
-        await updateCard(formData, abortCon.signal);
+        await updateDeck(formData, abortCon.signal);
         history.push(`/decks/${deckId}`);
       } catch (err) {
         throw err;
       }
     }
-    mode === "edit" ? editCard() : addCard();
+    mode === "create" ? createNewDeck() : editDeck();
+    return () => abortCon.abort();
   };
 
   return (
     <div className="d-flex flex-column">
       <form className="col-12" onSubmit={handleSubmit}>
         <div className="row form-group">
-          <label htmlFor="front">Front</label>
-          <textarea
+          <label htmlFor="name">Name</label>
+          <input
             type="text"
             className="form-control form-control-lg"
-            id="front"
-            name="front"
-            value={formData.front}
+            id="name"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
-            placeholder="Front side of card"
+            placeholder="Deck Name"
           />
         </div>
         <div className="row form-group">
-          <label htmlFor="back">Back</label>
+          <label htmlFor="description">Description</label>
           <textarea
             type="text"
             className="form-control form-control-lg"
-            id="back"
-            name="back"
-            value={formData.back}
+            id="description"
+            name="description"
+            value={formData.description}
             onChange={handleChange}
-            placeholder="Back side of card"
+            placeholder="Brief description of the deck"
           />
         </div>
         <div className="row">
-          <Link to={`/decks/${deckId}`} className="btn btn-secondary mr-2">
-            {mode === "edit" ? "Cancel" : "Done"}
+          <Link
+            to={mode === "create" ? "/" : `/decks/${deckId}`}
+            className="btn btn-secondary mr-2"
+          >
+            Cancel
           </Link>
           <button type="submit" className="btn btn-primary">
-            {mode === "edit" ? "Submit" : "Save"}
+            Submit
           </button>
         </div>
       </form>
