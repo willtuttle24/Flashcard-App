@@ -1,93 +1,117 @@
-import React, { useEffect, useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
-import { createCard, readCard, updateCard } from "../utils/api";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { createCard, updateCard } from "../../utils/api";
 
-export default function CardForm({ mode = "create" }) {
-  const history = useHistory();
-  const { deckId, cardId } = useParams();
-  const initialFormData = {
-    front: "",
-    back: "",
-  };
-  const [formData, setFormData] = useState({ ...initialFormData });
+export default function CardForm({ card, deckId, edit = false }) {
+    // two states, one for the front and one for the back
+    const [ cardFront, setcardFront ] = useState("");
+    const [ cardBack, setCardBack ] = useState("");
+    
+    const history = useHistory();
 
-  const handleChange = ({ target }) =>
-    setFormData({ ...formData, [target.name]: target.value });
+    //sets the cards front and back text
+    useEffect(() => {
+        setcardFront(card.front);
+        setCardBack(card.back);
+        //updates whenever one of them changes
+    }, [card.front, card.back])
 
-  useEffect(() => {
-    const abortCon = new AbortController();
-    async function getEditCard() {
-      try {
-        const cardToEdit = await readCard(cardId, abortCon.signal);
-        setFormData({ ...cardToEdit });
-      } catch (err) {
-        throw err;
-      }
+    // the object used for seting up new card
+    const newCard = {
+        front: cardFront,
+        back: cardBack,
     }
-    if (mode === "edit") {
-      getEditCard();
-    }
-    return () => abortCon.abort();
-  }, [cardId, mode]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const abortCon = new AbortController();
-    async function addCard() {
-      try {
-        await createCard(deckId, formData, abortCon.signal);
-        setFormData({ ...initialFormData });
-      } catch (err) {
-        throw err;
-      }
+    // if editing, creates an object to store data from current card
+    const cardUpdate = {
+        id: card.id,
+        front: cardFront,
+        back: cardBack,
+        deckId: deckId
     }
-    async function editCard() {
-      try {
-        await updateCard(formData, abortCon.signal);
-        history.push(`/decks/${deckId}`);
-      } catch (err) {
-        throw err;
-      }
+    
+    // sends user back to Deck view when they click cancel
+    function handleDoneCancelBtn() {
+        history.go(-1);
     }
-    mode === "edit" ? editCard() : addCard();
-  };
 
-  return (
-    <div className="d-flex flex-column">
-      <form className="col-12" onSubmit={handleSubmit}>
-        <div className="row form-group">
-          <label htmlFor="front">Front</label>
-          <textarea
-            type="text"
-            className="form-control form-control-lg"
-            id="front"
-            name="front"
-            value={formData.front}
-            onChange={handleChange}
-            placeholder="Front side of card"
-          />
-        </div>
-        <div className="row form-group">
-          <label htmlFor="back">Back</label>
-          <textarea
-            type="text"
-            className="form-control form-control-lg"
-            id="back"
-            name="back"
-            value={formData.back}
-            onChange={handleChange}
-            placeholder="Back side of card"
-          />
-        </div>
-        <div className="row">
-          <Link to={`/decks/${deckId}`} className="btn btn-secondary mr-2">
-            {mode === "edit" ? "Cancel" : "Done"}
-          </Link>
-          <button type="submit" className="btn btn-primary">
-            {mode === "edit" ? "Submit" : "Save"}
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+    // f
+    const handleFrontChange = (event) => setcardFront(event.target.value);
+    const handleBackChange = (event) => setCardBack(event.target.value);
+
+
+    //function for when user hits save submit 
+    async function handleSaveSubmit(event) {
+        //stop page from refreshing
+        event.preventDefault();
+        if(!edit){
+            //passes newCard object into createCard() function with the curent deckId to add the card to the deck
+            await createCard(deckId, newCard);
+            setcardFront("");
+            setCardBack("");
+        } else {
+            //if you clicked edut then it will update the card with the inputed text instead
+            await updateCard(cardUpdate);
+            history.go(-1);
+        }
+        
+    }
+
+    return (
+        <form onSubmit={handleSaveSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="cardFront">Front</label>
+                        <textarea 
+                        //form for the front side of the card
+                            type="text" 
+                            className="form-control" 
+                            id="cardFront" 
+                            rows="2"
+                            name="cardFront"
+                            //the text is stored here, used later for study
+                            value={cardFront}
+                            onChange={handleFrontChange}
+                            required={true}
+                            placeholder="Front side of card">
+                        </textarea>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="cardBack">Back</label>
+                        <textarea 
+                        //form for the back side of the card
+                            className="form-control" 
+                            id="cardBack" 
+                            rows="2"
+                            name="cardBack"
+                            //the text is stored here, used later for study
+                            value={cardBack}
+                            onChange={handleBackChange}
+                            required={true}
+                            placeholder="Back side of card">
+                        </textarea>
+                    </div>
+                    <div>
+                        <button onClick={(event) => {
+                            event.preventDefault();
+                            handleDoneCancelBtn();
+                        }}className="btn btn-secondary mr-1">
+                            {edit ? 
+                            //if edit
+                            "Cancel" 
+                            : 
+                            //if new
+                            "Done"
+                            }
+                            </button>
+                        <button type="submit" className="btn btn-primary ml-1">
+                            {edit ? 
+                            //if edit
+                            "Submit" 
+                            : 
+                            //if new
+                            "Save"}
+                            </button>
+                    </div>
+                </form>
+    );
 }
